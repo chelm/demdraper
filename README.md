@@ -5,7 +5,7 @@ A Python interface to [https://github.com/alex3165/react-mapbox-gl](react-mapbox
 ## Install
 
 ```bash
-pip install jupbox && jupyter nbextension enable --py jupbox
+pip install https://github.com/chelm/jupbox/archive/master.zip && jupyter nbextension enable --py jupbox
 ```
 
 ## Example usage 
