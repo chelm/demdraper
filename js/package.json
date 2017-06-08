@@ -41,6 +41,7 @@
     "mapbox-gl": "^0.37.0",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "react-mapbox-gl": "^1.12.0"
   }
 }

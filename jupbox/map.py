@@ -5,11 +5,11 @@ class Map(Component):
     target = 'jup.box'
 
     def __init__(self, **kwargs):
+        super(Map, self).__init__(target_name='jup.box', props=kwargs)
         self.layers = {}
         self.sources = {}
-        super(Map, self).__init__(target_name='jup.box', props=kwargs)
         self.send({"method": "display"})
-        self.on_msg(self._handle_msg)
+        self._update()
 
     def add_layer(self, layer):
         self.layers[layer['id']] = dict(layer)
@@ -30,9 +30,3 @@ class Map(Component):
           "sources": self.sources.values()
         }
         self.send({"method": "update", "props": props})
-
-    def _handle_msg(self, msg):
-        data = msg['content']['data']
-        print data
-        #data.get('method', '') == 'notify':
-        #    self.features = data.get('data', {}).get('features', [])
