@@ -10,7 +10,7 @@ except ImportError:
     install_nbextension = None
     ConfigManager = None
 
-extension_dir = os.path.join(os.path.dirname(__file__), "jupbox", "static")
+extension_dir = os.path.join(os.path.dirname(__file__), "demdraper", "static")
 
 class develop(_develop):
     try:
@@ -18,9 +18,9 @@ class develop(_develop):
             _develop.run(self)
             if install_nbextension is not None and ConfigManager is not None:
                 install_nbextension(extension_dir, symlink=True,
-                                overwrite=True, user=True, destination="jupbox")
+                                overwrite=True, user=True, destination="demdraper")
                 cm = ConfigManager()
-                cm.update('notebook', {"load_extensions": {"jupbox/index": True } })
+                cm.update('notebook', {"load_extensions": {"demdraper/index": True } })
     except:
         pass
 
@@ -30,23 +30,23 @@ class install(_install):
             _install.run(self)
             if install_nbextension is not None and ConfigManager is not None:
                 cm = ConfigManager()
-                cm.update('notebook', {"load_extensions": {"jupbox/index": True } })
+                cm.update('notebook', {"load_extensions": {"demdraper/index": True } })
     except:
         pass
 
-setup(name='jupbox',
+setup(name='demdraper',
       cmdclass={'develop': develop, 'install': install},
       version='0.0.1',
-      description='Python access to react-mapbox-gl for jupyter notebooks',
-      url='https://github.com/chelm/jupbox',
+      description='Python access to webgl stuff',
+      url='https://github.com/DigitalGlobe/demdraper',
       author='Chris Helm',
       author_email='christopeher.helm@gmail.com',
       license='MIT',
-      packages=['jupbox'],
+      packages=['demdraper'],
       zip_safe=False,
       data_files=[
-        ('share/jupyter/nbextensions/jupbox', [
-            'jupbox/static/index.js'
+        ('share/jupyter/nbextensions/demdraper', [
+            'demdraper/static/index.js'
         ]),
       ],
       install_requires=[

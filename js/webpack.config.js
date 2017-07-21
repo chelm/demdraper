@@ -18,7 +18,7 @@ module.exports = [
       entry: './src/index.js',
       output: {
           filename: 'index.js',
-          path: '../jupbox/static',
+          path: '../demdraper/static',
           libraryTarget: 'amd'
       },
       plugins:[

@@ -1,7 +1,7 @@
 import JupyterReact from 'jupyter-react-js';
 import components from './components';
 
-const target = 'jup.box';
+const target = 'dem.draper';
 
 function load_ipython_extension () {
   requirejs([
@@ -16,7 +16,7 @@ function load_ipython_extension () {
           commId
         });
       }
-      JupyterReact.init( Jupyter, events, 'jup.box', { components, on_update } );
+      JupyterReact.init( Jupyter, events, 'dem.draper', { components, on_update } );
   });
 }
 

@@ -1,12 +1,12 @@
 {
-  "name": "jupbox",
+  "name": "demdraper",
   "version": "0.0.1",
   "description": "",
   "author": "Chris Helm",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chelm/jupbox.git"
+    "url": "https://github.com/DigitalGlobe/demdraper.git"
   },
   "keywords": [
     "jupyter",
@@ -38,10 +38,10 @@
     "flux": "^2.1.1",
     "jupyter-react-js": "^0.4.0",
     "lodash": "^4.17.4",
-    "mapbox-gl": "^0.37.0",
     "prop-types": "^15.5.10",
-    "react": "^15.5.4",
-    "react-dom": "^15.3.2",
-    "react-mapbox-gl": "^1.12.0"
+    "react": "^15.5.3",
+    "react-dom": "^15.5.3",
+    "react-three-renderer": "^3.1.0",
+    "three": "^0.84.0"
   }
 }

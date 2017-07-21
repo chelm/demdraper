@@ -1,7 +1,7 @@
-import Map from './map.js';
+import Draper from './draper.js';
 import dispatcher from './dispatcher';
 
 export default {
-  Map,
+  Draper,
   dispatcher
 };
