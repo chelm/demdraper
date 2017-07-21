@@ -13,8 +13,11 @@ class Draper(Component):
     def __init__(self, dem, drape=None, **kwargs):
         super(Draper, self).__init__(target_name='dem.draper', props=kwargs)
 
-        self.width = kwargs.get("width", dem.shape[2])
-        self.height = kwargs.get("height", dem.shape[1])
+        self.width = dem.shape[2]
+        self.height = dem.shape[1]
+
+        self.vWidth = kwargs.get("width", 40)
+        self.vHeight = kwargs.get("height", 20)
 
         self.drape = None
         self.dem = self._process_dem(dem)
@@ -28,10 +31,13 @@ class Draper(Component):
         props = {
           "dem": self.dem,
           "width": self.width,
-          "height": self.height
+          "height": self.height,
+          "vWidth": self.vWidth,
+          "vHeight": self.vHeight,
         }
         if self.drape is not None:
             props["drape"] = self.drape
+
         self.send({"method": "update", "props": props})
 
     def _process_dem(self, dem, out="demdraper.bin"):

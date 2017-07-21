@@ -21458,12 +21458,14 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	              data = _payload$data === undefined ? {} : _payload$data;
 
 	          if (data.dem) {
-	            var width = data.width,
+	            var vWidth = data.vWidth,
+	                vHeight = data.vHeight,
+	                width = data.width,
 	                height = data.height,
 	                inDem = data.dem;
 
 	            _this2.loadTerrain('/notebooks/' + inDem, function (buf) {
-	              var dem = new THREE.PlaneGeometry(40, 20, width - 1, height - 1);
+	              var dem = new THREE.PlaneGeometry(vWidth, vHeight, width - 1, height - 1);
 
 	              var drape = null;
 	              if (data.drape) {

@@ -39,9 +39,9 @@ class Draper extends React.Component {
       if ( payload.actionType === 'draper_update' ) { //&& this.state.comm === payload.data.commId ) {
         const { data = {} } = payload;
         if ( data.dem ) {
-          const { width, height, dem: inDem } = data;
+          const { vWidth, vHeight, width, height, dem: inDem } = data;
           this.loadTerrain( '/notebooks/' + inDem, buf => {
-            const dem = new THREE.PlaneGeometry(40, 20, width-1, height-1);
+            const dem = new THREE.PlaneGeometry(vWidth, vHeight, width-1, height-1);
 
             let drape = null;
             if ( data.drape ) {
