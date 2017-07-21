@@ -21457,19 +21457,18 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	          var _payload$data = payload.data,
 	              data = _payload$data === undefined ? {} : _payload$data;
 
-	          if (data.dem && data.drape) {
+	          if (data.dem) {
 	            var width = data.width,
 	                height = data.height,
-	                dem = data.dem,
-	                drape = data.drape;
+	                inDem = data.dem;
 
-	            _this2.loadTerrain('/notebooks/' + data.dem, function (buf) {
-
-	              //const geom = new THREE.PlaneGeometry(200, 200, 923, 553);
+	            _this2.loadTerrain('/notebooks/' + inDem, function (buf) {
 	              var dem = new THREE.PlaneGeometry(40, 20, width - 1, height - 1);
 
-	              //const drape = new THREE.TextureLoader('/notebooks/'+ data.drape);
-	              var drape = THREE.ImageUtils.loadTexture('/notebooks/' + data.drape);
+	              var drape = null;
+	              if (data.drape) {
+	                drape = THREE.ImageUtils.loadTexture('/notebooks/' + data.drape);
+	              }
 
 	              dem.vertices.forEach(function (v, i) {
 	                return v.z = buf[i] / 65535 * 10;
@@ -21540,7 +21539,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	          dem = _state.dem,
 	          drape = _state.drape;
 
-	      var width = 700; // canvas width
+	      var width = 900; // canvas width
 	      var height = 700; // canvas height
 
 	      return _react2.default.createElement(
@@ -21568,9 +21567,7 @@ define(function() { return /******/ (function(modules) { // webpackBootstrap
 	            'mesh',
 	            { rotation: this.state.cubeRotation },
 	            _react2.default.createElement('planeGeometry', _extends({}, dem.parameters, { vertices: dem.vertices })),
-	            _react2.default.createElement('meshBasicMaterial', {
-	              map: drape
-	            })
+	            drape ? _react2.default.createElement('meshBasicMaterial', { map: drape }) : _react2.default.createElement('meshBasicMaterial', { color: 0xffffff, wireframe: true })
 	          )
 	        )
 	      );

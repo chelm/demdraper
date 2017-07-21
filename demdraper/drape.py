@@ -4,22 +4,22 @@ from subprocess import call
 import os
 from scipy.misc import imsave
 from skimage.transform import resize
+import gdal
 
 class Draper(Component):
     module = 'Draper'
     target = 'dem.draper'
 
-    def __init__(self, dem, drape, **kwargs):
+    def __init__(self, dem, drape=None, **kwargs):
         super(Draper, self).__init__(target_name='dem.draper', props=kwargs)
+
         self.width = kwargs.get("width", dem.shape[2])
         self.height = kwargs.get("height", dem.shape[1])
 
-        print dem.shape, drape.shape, self.width, self.height
+        self.drape = None
         self.dem = self._process_dem(dem)
-        self.drape = self._process_drape(drape)
-
-        #self.dem = 't.bin'
-        #self.drape = 'demdraper.png'
+        if drape is not None:
+            self.drape = self._process_drape(drape)
 
         self.send({"method": "display"})
         self._update()
@@ -27,17 +27,17 @@ class Draper(Component):
     def _update(self):
         props = {
           "dem": self.dem,
-          "drape": self.drape,
           "width": self.width,
           "height": self.height
         }
+        if self.drape is not None:
+            props["drape"] = self.drape
         self.send({"method": "update", "props": props})
 
     def _process_dem(self, dem, out="demdraper.bin"):
-        data = dem.read()
-        #dem = resize(dem, (1, self.height, self.width))
         tif = dem.geotiff(path='demdraper.tif')
-        #tif = 'demdraper.tif'
+        ds = gdal.Open(tif)
+        data = ds.ReadAsArray()
 
         cmd = ' '.join(['gdal_translate', '-scale', str(data.min()), str(data.max()), '0', '65535', '-outsize', str(self.width), str(self.height), '-ot', 'UInt16', '-of', 'ENVI', tif, out])
         os.system(cmd)

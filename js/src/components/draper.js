@@ -38,15 +38,15 @@ class Draper extends React.Component {
       console.log('PAYLOAD', payload)
       if ( payload.actionType === 'draper_update' ) { //&& this.state.comm === payload.data.commId ) {
         const { data = {} } = payload;
-        if ( data.dem && data.drape ) {
-          const { width, height, dem, drape } = data
-          this.loadTerrain( '/notebooks/' + data.dem, buf => {
-
-            //const geom = new THREE.PlaneGeometry(200, 200, 923, 553);
+        if ( data.dem ) {
+          const { width, height, dem: inDem } = data;
+          this.loadTerrain( '/notebooks/' + inDem, buf => {
             const dem = new THREE.PlaneGeometry(40, 20, width-1, height-1);
 
-            //const drape = new THREE.TextureLoader('/notebooks/'+ data.drape);
-            const drape = THREE.ImageUtils.loadTexture('/notebooks/' + data.drape)
+            let drape = null;
+            if ( data.drape ) {
+              drape = THREE.ImageUtils.loadTexture('/notebooks/' + data.drape );
+            }
 
             dem.vertices.forEach( ( v, i ) => v.z = buf[i] / 65535 * 10);
             this.setState( { dem, drape } );
@@ -107,7 +107,7 @@ class Draper extends React.Component {
 
   render() {
     const { dem, drape } = this.state;
-    const width = 700; // canvas width
+    const width = 900; // canvas width
     const height = 700; // canvas height
 
     return (<React3
@@ -130,9 +130,10 @@ class Draper extends React.Component {
           { dem && 
             <mesh rotation={this.state.cubeRotation}>
               <planeGeometry {...dem.parameters} vertices={ dem.vertices }/>
-              <meshBasicMaterial 
-                map={drape}
-              />
+              { drape 
+                ? <meshBasicMaterial map={drape}/>
+                : <meshBasicMaterial color={0xffffff} wireframe={true}/>
+              }
             </mesh>
           }
         </scene>
