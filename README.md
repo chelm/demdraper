@@ -1,5 +1,7 @@
 # Dem Draper
 
+<img src="https://daeandwrite.files.wordpress.com/2015/04/mad-men-silhouette.jpg" width="200">
+
 More than a visualization, it's an experience.  
 
 ## Install
