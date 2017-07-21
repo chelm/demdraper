@@ -1,25 +1,15 @@
-JupBox
+# Dem Draper
 
-A Python interface to [https://github.com/alex3165/react-mapbox-gl](react-mapbox-gl) for using in a Jupyter Notebook. 
+More than a visualization, it's an experience.  
 
 ## Install
 
 ```bash
-pip install https://github.com/chelm/jupbox/archive/master.zip && jupyter nbextension enable --py jupbox
+pip install https://github.com/DigitalGlobe/demdraper/archive/master.zip && jupyter nbextension enable --py demdraper
 ```
 
 ## Example usage 
 
 ```python
 
-from jupbox import Map, GeoJsonLayer
-from IPython.display import display
-
-m = Map(zoom=10, center=[lon, lat], api_key='YOUR_MB_TOKEN')
-
-layer = GeoJsonLayer(geojson, style={})
-
-m.add_layer(layer)
-
-display(m)
 ```
